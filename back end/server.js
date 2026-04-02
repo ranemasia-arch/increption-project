@@ -8,15 +8,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ✅ serve frontend files
+// 🔥 مهم: تشغيل ملفات الفرونت
 app.use(express.static(path.join(__dirname, "../front end")));
 
-// ✅ homepage
+// 🌐 الصفحة الرئيسية
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../front end/wep.html"));
 });
 
-// 🔐 API
+// 🔐 API التشفير
 app.post("/cipher", (req, res) => {
     const { text, otp, mode } = req.body;
 
@@ -39,7 +39,7 @@ app.post("/cipher", (req, res) => {
     });
 });
 
-// ✅ Render port
+// 🚀 Render port
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log("Server running on port " + PORT);

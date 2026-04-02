@@ -1,4 +1,4 @@
-const API_URL = "https://YOUR-RENDER-APP.onrender.com/cipher";
+const API_URL = "https://increption-project.onrender.com/cipher";
 
 async function run() {
     const text = document.getElementById("text").value;
@@ -17,19 +17,19 @@ async function run() {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                text,
-                otp,
-                mode
-            })
+            body: JSON.stringify({ text, otp, mode })
         });
 
         const data = await res.json();
 
-        output.textContent = data.result || data.error;
+        if (data.result) {
+            output.textContent = data.result;
+        } else {
+            output.textContent = data.error || "Error";
+        }
 
     } catch (err) {
         console.error(err);
-        output.textContent = "Failed to fetch ❌";
+        output.textContent = "Failed to fetch ❌ (check server)";
     }
 }
