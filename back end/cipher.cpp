@@ -13,9 +13,9 @@ typedef uint32_t block;
 string urlDecode(string str) {
     string ret;
     char ch;
-    int i, ii;
+    int ii;
 
-    for (i = 0; i < str.length(); i++) {
+    for (int i = 0; i < str.length(); i++) {
         if (str[i] == '%') {
             sscanf(str.substr(i + 1, 2).c_str(), "%x", &ii);
             ch = static_cast<char>(ii);
@@ -32,8 +32,7 @@ string urlDecode(string str) {
     return ret;
 }
 
-// ================= CORE =================
-
+// ================= FEISTEL =================
 block F(block right, block key) {
     block r = right & 0xFFFF;
     block k = key & 0xFFFF;
@@ -70,7 +69,6 @@ block decryptBlock(block data, block keys[], int rounds) {
 }
 
 // ================= TEXT =================
-
 vector<block> textToBlocks(string text) {
     vector<block> blocks;
 
@@ -83,7 +81,6 @@ vector<block> textToBlocks(string text) {
         }
         blocks.push_back(b);
     }
-
     return blocks;
 }
 
@@ -97,7 +94,6 @@ vector<block> hexToBlocks(string hexStr) {
         stringstream(item) >> hex >> b;
         blocks.push_back(b);
     }
-
     return blocks;
 }
 
@@ -111,12 +107,10 @@ string blocksToText(vector<block> blocks) {
                 text += c;
         }
     }
-
     return text;
 }
 
 // ================= OTP TEXT =================
-
 block getOTPKey(string key, size_t index) {
     block k = 0;
 
@@ -129,7 +123,6 @@ block getOTPKey(string key, size_t index) {
 }
 
 // ================= MAIN =================
-
 int main(int argc, char* argv[]) {
 
     if (argc < 4) {
