@@ -1,12 +1,25 @@
 const express = require("express");
 const cors = require("cors");
 const { execFile } = require("child_process");
+const path = require("path");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
+
+// ✅ مهم: تشغيل ملفات الفرونت (CSS/JS)
+app.use(express.static(path.join(__dirname, "../front end")));
+
+
+// ✅ فتح الصفحة الرئيسية
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "../front end/wep.html"));
+});
+
+
+// 🔐 API تبع التشفير (كما هو عندك)
 app.post("/cipher", (req, res) => {
     const { text, otp, mode } = req.body;
 
@@ -31,6 +44,9 @@ app.post("/cipher", (req, res) => {
     });
 });
 
-app.listen(3000, () => {
-    console.log("Server running on http://localhost:3000");
+
+// 🔥 مهم لـ Render
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log("Server running on port " + PORT);
 });
