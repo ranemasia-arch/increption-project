@@ -7,26 +7,29 @@
 
 <body>
 
-<div class="card">
+  <div class="card">
 
-  <textarea id="text" placeholder="Enter text here"></textarea>
+    <textarea id="text" placeholder="Enter text here"></textarea>
 
-  <input id="otp" type="number" placeholder="Enter OTP">
+    <input id="otp" type="number" placeholder="Enter OTP">
 
-  <select id="mode">
-    <option value="encrypt">Encrypt</option>
-    <option value="decrypt">Decrypt</option>
-  </select>
+    <!-- select -->
+    <div class="select-wrapper">
+      <select id="mode">
+        <option value="encrypt">Encrypt</option>
+        <option value="decrypt">Decrypt</option>
+      </select>
+    </div>
 
-  <button onclick="run()">Run</button>
+    <!-- أزرار مع إيموجي -->
+    <button onclick="run()">⚡ Run</button>
+    <button onclick="useLastCipher()">🔒 Use Last Cipher</button>
 
-  <button onclick="useLastCipher()">Use Last Cipher</button>
+    <pre id="output"></pre>
 
-  <pre id="output"></pre>
+  </div>
 
-</div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 
 </body>
 </html>

@@ -11,26 +11,92 @@ body {
 .card {
   background: #1e293b;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 12px;
   width: 400px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
 }
 
-textarea, input, select {
+/* توحيد كل العناصر */
+textarea, input, button, pre {
   width: 100%;
+  box-sizing: border-box;
+}
+
+/* الحقول */
+textarea, input {
   margin: 10px 0;
   padding: 10px;
+  height: 45px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
 }
 
-button {
+/* textarea أكبر */
+textarea {
+  height: 80px;
+  resize: none;
+}
+
+/* select wrapper */
+.select-wrapper {
+  margin: 10px 0;
+}
+
+/* select مضبوط 100% */
+.select-wrapper select {
   width: 100%;
+  height: 45px;
   padding: 10px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* الأزرار 3D + Neon Glow */
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px; /* مسافة بين النص والإيموجي */
+  
+  padding: 12px;
   background: #38bdf8;
   border: none;
+  border-radius: 8px;
+  margin-top: 12px;
   cursor: pointer;
+  font-weight: bold;
+
+  /* 3D effect */
+  box-shadow: 0 5px 0 #0a93d3;
+  transition: all 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* عند الضغط */
+button:active {
+  transform: translateY(5px);
+  box-shadow: 0 0 0 #0ea5e9;
+}
+
+/* Neon Glow عند المرور بالماوس */
+button:hover {
+  background: #0d95d5;
+  box-shadow: 
+    0 5px 0 #0a93d3,
+    0 0 10px #38bdf8,
+    0 0 20px #38bdf8,
+    0 0 30px #38bdf8;
+}
+
+/* النتيجة */
 pre {
   background: black;
-  padding: 10px;
-  margin-top: 10px;
+  padding: 12px;
+  margin-top: 15px;
+  border-radius: 6px;
+  overflow-x: auto;
 }
