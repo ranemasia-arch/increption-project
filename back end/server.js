@@ -8,25 +8,20 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-
-// ✅ مهم: تشغيل ملفات الفرونت (CSS/JS)
+// ✅ serve frontend files
 app.use(express.static(path.join(__dirname, "../front end")));
 
-
-// ✅ فتح الصفحة الرئيسية
+// ✅ homepage
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../front end/wep.html"));
 });
 
-
-// 🔐 API تبع التشفير (كما هو عندك)
+// 🔐 API
 app.post("/cipher", (req, res) => {
     const { text, otp, mode } = req.body;
 
-    console.log("Request:", req.body);
-
-    if (!text || !mode || typeof otp !== "string") {
-        return res.status(400).send("Missing required fields");
+    if (!text || !otp || !mode) {
+        return res.status(400).json({ error: "Missing fields" });
     }
 
     const safeText = encodeURIComponent(text);
@@ -34,8 +29,8 @@ app.post("/cipher", (req, res) => {
 
     execFile("./cipher.exe", [mode, safeText, safeOtp], (err, stdout) => {
         if (err) {
-            console.error("Execution error:", err);
-            return res.status(500).send("C++ error");
+            console.error(err);
+            return res.status(500).json({ error: "C++ error" });
         }
 
         res.json({
@@ -44,8 +39,7 @@ app.post("/cipher", (req, res) => {
     });
 });
 
-
-// 🔥 مهم لـ Render
+// ✅ Render port
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log("Server running on port " + PORT);

@@ -1,46 +1,35 @@
-let lastCipher = "";
+const API_URL = "https://YOUR-RENDER-APP.onrender.com/cipher";
 
-async function run(retry = true) {
+async function run() {
     const text = document.getElementById("text").value;
-    const otp = document.getElementById("otp").value.trim();
+    const otp = document.getElementById("otp").value;
     const mode = document.getElementById("mode").value;
     const output = document.getElementById("output");
 
-    if (!text) return alert("Enter text!");
-    if (!otp) return alert("Enter OTP!");
-
-    output.innerText = "Processing...";
+    if (!text || !otp) {
+        alert("Please fill all fields");
+        return;
+    }
 
     try {
-        const res = await fetch("http://localhost:3000/cipher", {
+        const res = await fetch(API_URL, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ text, otp, mode })
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                text,
+                otp,
+                mode
+            })
         });
 
         const data = await res.json();
-        output.innerText = data.result;
 
-        if (mode === "encrypt") {
-            lastCipher = data.result;
-        }
+        output.textContent = data.result || data.error;
 
     } catch (err) {
         console.error(err);
-
-        if (retry) {
-            output.innerText = "Retrying...";
-            await new Promise(r => setTimeout(r, 500));
-            run(false);
-        } else {
-            output.innerText = "Error: " + err.message;
-        }
+        output.textContent = "Failed to fetch ❌";
     }
-}
-
-function useLastCipher() {
-    if (!lastCipher) return alert("No cipher!");
-
-    document.getElementById("text").value = lastCipher;
-    document.getElementById("mode").value = "decrypt";
 }
