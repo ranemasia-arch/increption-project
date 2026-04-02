@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cipher System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="card">
+
+  <textarea id="text" placeholder="Enter text"></textarea>
+
+  <input id="otp" type="text" placeholder="Enter OTP Key">
+
+  <div class="select-wrapper">
+    <select id="mode">
+      <option value="encrypt">Encrypt</option>
+      <option value="decrypt">Decrypt</option>
+    </select>
+  </div>
+
+  <button onclick="run()">⚡ Run</button>
+  <button onclick="useLastCipher()">🔒 Use Last Cipher</button>
+
+  <pre id="output"></pre>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

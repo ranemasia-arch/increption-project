@@ -1,0 +1,3 @@
+﻿  ConsoleApplication44.cpp
+C:\Users\SHAHROR\source\repos\ConsoleApplication44\ConsoleApplication44\ConsoleApplication44.cpp(119,22): warning C4267: 'initializing': conversion from 'size_t' to 'block', possible loss of data
+  ConsoleApplication44.vcxproj -> C:\Users\SHAHROR\source\repos\ConsoleApplication44\x64\Debug\ConsoleApplication44.exe

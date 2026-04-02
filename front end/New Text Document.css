@@ -1,0 +1,73 @@
+body {
+  background: #0f172a;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial;
+}
+
+.card {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+  width: 400px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+/* 🔥 توحيد الاستقامة لكل العناصر */
+textarea, input, select, button, pre {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* الحقول */
+textarea, input, select {
+  margin: 10px 0;
+  padding: 10px;
+  height: 45px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
+}
+
+/* textarea أكبر */
+textarea {
+  height: 80px;
+  resize: none;
+}
+
+/* 🔥 حل مشكلة select (Encrypt) */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* الأزرار */
+button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: #38bdf8;
+  border: 2px solid #0ea5e9;
+  border-radius: 6px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #0ea5e9;
+}
+
+/* النتيجة */
+pre {
+  background: black;
+  padding: 12px;
+  margin-top: 15px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
