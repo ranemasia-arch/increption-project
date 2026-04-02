@@ -1,18 +1,18 @@
 let lastCipher = "";
 
-async function run() {
+async function run(retry = true) {
     const text = document.getElementById("text").value;
     const otp = document.getElementById("otp").value;
     const mode = document.getElementById("mode").value;
     const output = document.getElementById("output");
 
-    if (!text || !otp) {
-        output.textContent = "❌ Please enter text and OTP";
-        return;
-    }
+    if (!text) return alert("Please enter text!");
+    if (!otp) return alert("Please enter OTP!");
+
+    output.innerText = "Processing...";
 
     try {
-        const res = await fetch("/cipher", {
+        const res = await fetch("http://localhost:3000/cipher", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -20,36 +20,34 @@ async function run() {
             body: JSON.stringify({ text, otp, mode })
         });
 
-        const data = await res.json();
-
         if (!res.ok) {
-            output.textContent = "❌ Server Error";
-            return;
+            throw new Error(`Server responded with status ${res.status}`);
         }
 
-        lastCipher = data.result;
+        const data = await res.text();
 
-        output.textContent =
-            "✅ RESULT:\n\n" + data.result;
+        output.innerText = data;
+
+        if (mode === "encrypt") {
+            lastCipher = data.trim();
+        }
 
     } catch (err) {
-        output.textContent = "❌ Failed to fetch";
-        console.error(err);
+        console.error("Fetch error:", err);
+
+        if (retry) {
+            output.innerText = "Retrying request...";
+            await new Promise(r => setTimeout(r, 500));
+            run(false);
+        } else {
+            output.innerText = `Error: ${err.message}`;
+        }
     }
 }
 
-
-// 🔥 زر استخدام آخر نتيجة
 function useLastCipher() {
-    const output = document.getElementById("output");
-
-    if (!lastCipher) {
-        output.textContent = "❌ No previous cipher found";
-        return;
-    }
+    if (!lastCipher) return alert("No cipher yet!");
 
     document.getElementById("text").value = lastCipher;
-
-    output.textContent =
-        "🔁 Loaded last cipher:\n\n" + lastCipher;
+    document.getElementById("mode").value = "decrypt";
 }

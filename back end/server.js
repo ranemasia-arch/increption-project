@@ -8,38 +8,36 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const frontendPath = path.join(__dirname, "../front end");
+// 👇 مهم: تشغيل الفرونت إند من نفس السيرفر
+app.use(express.static(path.join(__dirname, "frontend")));
 
-// تشغيل الفرونت
-app.use(express.static(frontendPath));
-
-// الصفحة الرئيسية
-app.get("/", (req, res) => {
-    res.sendFile(path.join(frontendPath, "wep.html"));
-});
-
-// API
+// 🔐 Cipher endpoint
 app.post("/cipher", (req, res) => {
     const { text, otp, mode } = req.body;
 
     if (!text || !otp || !mode) {
-        return res.status(400).json({ error: "Missing fields" });
+        return res.status(400).send("Missing fields");
     }
 
-    const safeText = encodeURIComponent(text);
-    const safeOtp = encodeURIComponent(otp);
+    // 👇 تشغيل ملف C++
+    const exePath = path.join(__dirname, "cipher.exe");
 
-    execFile("./cipher.exe", [mode, safeText, safeOtp], (err, stdout) => {
-        if (err) {
-            return res.status(500).json({ error: "C++ error" });
+    execFile(exePath, [text, otp, mode], (error, stdout, stderr) => {
+        if (error) {
+            console.error("C++ Error:", error);
+            return res.status(500).send("Server Error");
         }
 
-        res.json({ result: stdout.trim() });
+        if (stderr) {
+            console.error("stderr:", stderr);
+        }
+
+        res.send(stdout.trim());
     });
 });
 
-const PORT = process.env.PORT || 3000;
-
+// 👇 تشغيل السيرفر
+const PORT = 3000;
 app.listen(PORT, () => {
-    console.log("Server running on port " + PORT);
+    console.log(`Server running on http://localhost:${PORT}`);
 });

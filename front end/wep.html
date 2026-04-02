@@ -1,35 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Cipher System</title>
+  <title>Cipher UI</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <div class="card">
+<div class="card">
 
-    <h2>Cipher System</h2>
+  <textarea id="text" placeholder="Enter text here"></textarea>
 
-    <textarea id="text" placeholder="Enter text"></textarea>
+  <input id="otp" type="number" placeholder="Enter OTP">
 
-    <input id="otp" type="text" placeholder="Enter OTP Key">
+  <select id="mode">
+    <option value="encrypt">Encrypt</option>
+    <option value="decrypt">Decrypt</option>
+  </select>
 
-    <select id="mode">
-      <option value="encrypt">Encrypt</option>
-      <option value="decrypt">Decrypt</option>
-    </select>
+  <button onclick="run()">Run</button>
 
-    <button onclick="run()">⚡ Run</button>
+  <button onclick="useLastCipher()">Use Last Cipher</button>
 
-    <button onclick="useLastCipher()">🔒 Use Last Cipher</button>
+  <pre id="output"></pre>
 
-    <pre id="output"></pre>
+</div>
 
-  </div>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>

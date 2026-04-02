@@ -11,53 +11,26 @@ body {
 .card {
   background: #1e293b;
   padding: 20px;
-  border-radius: 12px;
+  border-radius: 10px;
   width: 400px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.4);
 }
 
-textarea, input, button, pre {
+textarea, input, select {
   width: 100%;
-  box-sizing: border-box;
-}
-
-textarea, input {
   margin: 10px 0;
   padding: 10px;
-  height: 45px;
-  border-radius: 6px;
-  border: none;
-}
-
-textarea {
-  height: 80px;
-  resize: none;
-}
-
-.select-wrapper {
-  margin: 10px 0;
-}
-
-.select-wrapper select {
-  width: 100%;
-  height: 45px;
-  border-radius: 6px;
-  border: none;
 }
 
 button {
-  padding: 12px;
+  width: 100%;
+  padding: 10px;
   background: #38bdf8;
   border: none;
-  border-radius: 8px;
-  margin-top: 12px;
   cursor: pointer;
-  font-weight: bold;
 }
 
 pre {
   background: black;
-  padding: 12px;
-  margin-top: 15px;
-  border-radius: 6px;
+  padding: 10px;
+  margin-top: 10px;
 }
